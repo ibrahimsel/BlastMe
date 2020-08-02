@@ -62,21 +62,23 @@ go = True
 # Create the game window
 window = pygame.display.set_mode((window_x, window_y))
 pygame.display.set_caption("Blast Me")
+
 # Set the timer up
 clock = pygame.time.Clock()
 
-while go:
+while go:  # Main loop
     clock.tick(30)
     squares_y += squares_y_vel
     keys = pygame.key.get_pressed()
     window.fill(BLACK)
 
-    for event in pygame.event.get():  # Shuts down if desired
+    for event in pygame.event.get():  # Shuts the program down if desired
         if event.type == pygame.QUIT:
             go = False
 
-    if keys[pygame.K_q]:
+    if keys[pygame.K_q]:  # Allow user to quit the program by pressing q
         pygame.quit()
+        quit(0)
 
     if keys[pygame.K_LEFT]:
         if shooter_x > 0:  # Keeps the shooter from getting out of screen
@@ -95,7 +97,8 @@ while go:
         projectile_x = shooter_x
         projectile_y = shooter_y
         pygame.draw.circle(window, RED, (projectile_x, projectile_y), projectile_radius, 2)
-        while projectile_y + projectile_radius > 0:
+        
+        while projectile_y + projectile_radius > 0:  #  Allow the movement of objects while shooting
             clock.tick(27)
             keys = pygame.key.get_pressed()
             window.fill(BLACK)
@@ -103,6 +106,7 @@ while go:
             for event in pygame.event.get():  # Makes it possible to quit the program
                 if event.type == pygame.QUIT:
                     go = False
+                    
             if keys[pygame.K_LEFT]:
                 if shooter_x > 0:  # Keeps the shooter from getting out of screen
                     shooter_x -= shooter_x_vel
