@@ -1,7 +1,6 @@
 """
 ------------------------------------------------------------------------
 Author's name: Ibrahim Sel
-
 The purpose of this game is to shoot down all 4 squares on the screen before they reach the shooter.
 Use the arrow keys to move left and right and use the space key to shoot.
 This is the first game I have ever made and hopefully, more will be coming soon.
@@ -18,7 +17,7 @@ square1_x = 50
 square2_x = 250
 square3_x = 450
 square4_x = 650
-projectile_x = 365
+projectile_x = 360
 
 # Define the y positions of objects
 shooter_y = 450
@@ -96,9 +95,9 @@ while go:  # Main loop
         projectiles_fired += 1
         projectile_x = shooter_x
         projectile_y = shooter_y
-        pygame.draw.circle(window, RED, (projectile_x, projectile_y), projectile_radius, 2)
-        
-        while projectile_y + projectile_radius > 0:  #  Allow the movement of objects while shooting
+        pygame.draw.circle(window, RED, (projectile_x + projectile_radius, projectile_y - projectile_radius), projectile_radius, 2)
+
+        while projectile_y + projectile_radius > 0:  # Allow the movement of objects while shooting
             clock.tick(27)
             keys = pygame.key.get_pressed()
             window.fill(BLACK)
@@ -106,7 +105,7 @@ while go:  # Main loop
             for event in pygame.event.get():  # Makes it possible to quit the program
                 if event.type == pygame.QUIT:
                     go = False
-                    
+
             if keys[pygame.K_LEFT]:
                 if shooter_x > 0:  # Keeps the shooter from getting out of screen
                     shooter_x -= shooter_x_vel
@@ -168,7 +167,7 @@ while go:  # Main loop
             pygame.draw.rect(window, (0, 0, 255), (shooter_x, shooter_y, shooter_width, shooterHeight))
 
             # Projectile
-            pygame.draw.circle(window, RED, (projectile_x, projectile_y), projectile_radius, 2)
+            pygame.draw.circle(window, RED, (projectile_x + projectile_radius, projectile_y - projectile_radius), projectile_radius, 2)
             projectile_y -= projectile_y_vel
             pygame.display.update()
 
